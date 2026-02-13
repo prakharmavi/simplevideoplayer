@@ -6,14 +6,14 @@
 }
 
 .install-prompt-button {
-    background: pink;
+    background: transparent;
     border: 1px solid pink;
     border-radius: 5px;
     cursor: pointer;
-    color: #000;
+    color: pink;
     padding: 8px 16px;
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .install-prompt-actions {
@@ -23,21 +23,22 @@
 }
 
 .install-prompt-button:hover {
-    opacity: 0.9;
+    background: rgba(255, 192, 203, 0.1);
 }
 
 .install-prompt-dismiss {
-    background: none;
-    border: none;
+    background: pink;
+    border: 1px solid pink;
+    border-radius: 5px;
     cursor: pointer;
-    color: pink;
-    font-size: 11px;
-    opacity: 0.6;
-    padding: 4px;
+    color: #000;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
 }
 
 .install-prompt-dismiss:hover {
-    opacity: 1;
+    opacity: 0.9;
 }
 
 .install-prompt-tip {

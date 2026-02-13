@@ -10,6 +10,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
+    // Keep only the current cache version to avoid stale responses from older releases.
     event.waitUntil(
         caches.keys().then((keys) =>
             Promise.all(
@@ -25,7 +26,8 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     const { request } = event;
 
-    // Skip non-GET requests and chrome-extension URLs
+    // This runs for requests from controlled pages in this SW scope, including third-party GETs.
+    // Skip non-GET requests and extension URLs.
     if (request.method !== 'GET' || request.url.startsWith('chrome-extension'))
         return;
 
