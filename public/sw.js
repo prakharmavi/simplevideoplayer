@@ -2,6 +2,14 @@ const CACHE_NAME = 'svp-cache-v1';
 
 const PRECACHE_ASSETS = ['/', '/screen'];
 
+function isSameOriginUrl(url) {
+    try {
+        return new URL(url).origin === self.location.origin;
+    } catch (_error) {
+        return false;
+    }
+}
+
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS))
@@ -45,7 +53,7 @@ self.addEventListener('fetch', (event) => {
             const fetchPromise = fetch(request)
                 .then((response) => {
                     // Only cache same-origin responses
-                    if (response.ok && new URL(request.url).origin === self.location.origin) {
+                    if (response.ok && isSameOriginUrl(request.url)) {
                         const clone = response.clone();
                         caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
                     }
